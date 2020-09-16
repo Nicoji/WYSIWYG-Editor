@@ -4,32 +4,33 @@ body {
 
 #editor {
     background-color: white;
+    border-radius: 10px;
+    box-shadow: 3px 6px 31px 0px rgb(44, 44, 44);
 }
 .icon-block {
     /* background-color: rgb(190, 190, 190); */
     margin: auto;
     position: relative;
-    width: 98%;
+    width: 95%;
     border-bottom: 2px solid #c9c9c9;
-    /* display: flex; */
+    display: flex;
 }
 
 .icon-block svg {
     padding: 5px;
-    cursor: pointer;
-    /* margin-right: 5px; */
-}
-
-.bi:hover {
-    background-color: #c9c9c9;
-    border-radius: 5px;
 }
 
 .text-block {
     background-color: #fff;
     width: 100%;
-    height: 200px;
-    border-radius: 0px 0px 5px 5px;
+    min-height: 300px;
+    height: 100%;
+    border-radius: 0px 0px 10px 10px;
+    padding: 10px;
+}
+
+.text-block:focus {
+    outline: 0px solid transparent;
 }
 
 .dot {
@@ -48,11 +49,21 @@ body {
 
 .arrow-menu {
     font-size: 10px;
-    margin-left: -12px;
+    margin-top: 10px;
+    /* border: 1px solid red; */
 }
 
 [class*="drop-toggle"] {
     /* background-color: blue; */
     padding-right: 10px;
+    display: flex;
+}
+[class*="drop-toggle"]:hover, .bi:hover{
+    background-color: #c9c9c9;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
+.editor-item:hover {
+    text-decoration: none;
+}
