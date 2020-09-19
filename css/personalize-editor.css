@@ -1,3 +1,7 @@
+:root {    
+    --submenu-color: #e7e7e7; 
+}
+
 body {
     background-color: rgb(44, 93, 184);
 }
@@ -6,14 +10,19 @@ body {
     background-color: white;
     border-radius: 10px;
     box-shadow: 3px 6px 31px 0px rgb(44, 44, 44);
+    min-width: 630px;
+    max-width: 900px;
+    margin: auto;
+    /* margin: 0px 50px; */
 }
+
 .icon-block {
     /* background-color: rgb(190, 190, 190); */
     margin: auto;
     position: relative;
     width: 95%;
-    border-bottom: 2px solid #c9c9c9;
-    display: flex;
+    /* border-bottom: 2px solid #c9c9c9; */
+
 }
 
 .icon-block svg {
@@ -38,7 +47,7 @@ body {
 }
 
 .d-menu {
-    background-color: #e7e7e7;
+    background-color: var(--submenu-color);
     position: absolute;
     left: 3px;
     top: 45px;
@@ -66,4 +75,34 @@ body {
 
 .editor-item:hover {
     text-decoration: none;
+}
+
+.d-menu {
+    display: flex;
+}
+
+.drop-toggle-custom a{
+    margin-right: -5px;
+}
+
+.br1, .br2 {
+    display: none;
+}
+
+@media (max-width: 863px) AND (min-width: 660px) {
+    .br2 {
+        display: initial;
+    }
+    .sp4 {
+        display: none;
+    }
+}
+
+@media (max-width: 660px) {
+    .br1 {
+        display: initial;
+    }
+    .sp3 {
+        display: none;
+    } 
 }
