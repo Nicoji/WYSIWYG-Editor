@@ -107,4 +107,28 @@ const changeColor = (event, element) => {
     // }
 }
 
+const changeSelection = (element) => {
+
+    switch(element) {
+        case 'quote': 
+            var range = window.getSelection().getRangeAt(0);
+            var selectionContents = range.extractContents();
+            var quote = document.createElement("blockquote");
+            quote.appendChild(selectionContents);
+            quote.classList.add('quote');
+            range.insertNode(quote);
+            break; 
+        case 'h1':
+            var range = window.getSelection().getRangeAt(0);
+            var selectionContents = range.extractContents();
+            var h1 = document.createElement("h1");
+            h1.appendChild(selectionContents);
+            range.insertNode(h1);
+            break;
+    }
+
+
+}
+
+
 iconBlock.style.borderBottom = "2px solid #c9c9c9";

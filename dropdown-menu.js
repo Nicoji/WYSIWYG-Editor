@@ -12,7 +12,11 @@ const items = document.querySelectorAll('a');
 let lastOpenedMenu = "";
 let lastToggle = "";
 
-const dropdown = (menuToOpen, toggle) => {
+const dropdown = (menuToOpen, toggle, Event) => {
+
+    Event.defaultPrevented;
+
+    console.log(window.getSelection().toString());
 
     if(menuToOpen == "a") {
         if(lastOpenedMenu != "") {
@@ -93,7 +97,7 @@ setInterval(function() {
 //     });
 // }
 dropToggleHeading.addEventListener('click', function(){
-    dropdown(dropMenuHeading, dropToggleHeading);
+    dropdown(dropMenuHeading, dropToggleHeading, Event);
 });
 dropToggleText.addEventListener('click', function(){
     dropdown(dropMenuText, dropToggleText);
