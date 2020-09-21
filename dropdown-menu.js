@@ -5,6 +5,8 @@ const dropToggleText = document.querySelector('.drop-toggle-text');
 const dropMenuText = document.querySelector('.drop-menu-text');
 const dropToggleJustify = document.querySelector('.drop-toggle-justify');
 const dropMenuJustify = document.querySelector('.drop-menu-justify');
+const dropToggleLink = document.querySelector('.drop-toggle-link');
+const dropMenuLink = document.querySelector('.drop-menu-link');
 const dropToggleCustom = document.querySelector('.drop-toggle-custom');
 const dropMenuCustom = document.querySelector('.drop-menu-custom');
 const items = document.querySelectorAll('a');
@@ -12,11 +14,10 @@ const items = document.querySelectorAll('a');
 let lastOpenedMenu = "";
 let lastToggle = "";
 
-const dropdown = (menuToOpen, toggle, Event) => {
+const dropdown = (menuToOpen, toggle, event) => {
 
-    Event.defaultPrevented;
+    event.defaultPrevented;
 
-    console.log(window.getSelection().toString());
 
     if(menuToOpen == "a") {
         if(lastOpenedMenu != "") {
@@ -42,6 +43,7 @@ const dropdown = (menuToOpen, toggle, Event) => {
         dropMenuText.style.display = "none";
         dropMenuJustify.style.display = "none";
         dropMenuCustom.style.display = "none";
+        dropMenuLink.style.display = "none";
 
         if(menuToOpen.classList.contains('open')) {
             menuToOpen.style.display = "none";
@@ -97,16 +99,19 @@ setInterval(function() {
 //     });
 // }
 dropToggleHeading.addEventListener('click', function(){
-    dropdown(dropMenuHeading, dropToggleHeading, Event);
+    dropdown(dropMenuHeading, dropToggleHeading, event);
 });
 dropToggleText.addEventListener('click', function(){
-    dropdown(dropMenuText, dropToggleText);
+    dropdown(dropMenuText, dropToggleText, event);
 });
 dropToggleJustify.addEventListener('click', function(){
-    dropdown(dropMenuJustify, dropToggleJustify);
+    dropdown(dropMenuJustify, dropToggleJustify, event);
 });
 dropToggleCustom.addEventListener('click', function(){
-    dropdown(dropMenuCustom, dropToggleCustom);
+    dropdown(dropMenuCustom, dropToggleCustom, event);
+});
+dropToggleLink.addEventListener('click', function(){
+    dropdown(dropMenuLink, dropToggleLink, event);
 });
 
 for (let item of items) {
@@ -119,5 +124,6 @@ dropMenuHeading.style.display = "none";
 dropMenuText.style.display = "none";
 dropMenuJustify.style.display = "none";
 dropMenuCustom.style.display = "none";
+dropMenuLink.style.display = "none";
 
 

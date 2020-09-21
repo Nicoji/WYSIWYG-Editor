@@ -6,6 +6,10 @@ const textEditor = document.querySelector('.text-block');
 const iconBlock = document.querySelector('.icon-block');
 const dMenu = document.querySelectorAll('.d-menu');
 const labels = document.querySelectorAll('label');
+const linkInput = document.querySelector('.link-input');
+const titleInput = document.querySelector('.title-input');
+const targetInput = document.querySelector('#target-input');
+
 // ici je le déclare pour tester la modification des couleurs
 // des icons, mais normalement svg est créé par le script
 
@@ -66,7 +70,35 @@ const labels = document.querySelectorAll('label');
 
 
 const changeText = (command, ShowDefaultUI, value) => {
+    console.log(value);
     document.execCommand(command, ShowDefaultUI, value);
+}
+
+const createLink = (link, title, target, text) => {
+
+    let htmlCode = "";
+    console.log(link);
+    console.log(title);
+    console.log(target);
+    console.log(text);
+
+    if(title !== "" && target === true) {
+        htmlCode = "<a href='" + link + "' title='" + title + "' target='_blank'>" + text + "</a>";
+        console.log("title + target");
+    } else if(title !== "" && target === false) {
+        htmlCode = "<a href='" + link + "' title='" + title + "'>" + text + "</a>";
+        console.log("title only");
+    } else if(title === "" && target === true) {
+        htmlCode = "<a href='" + link + "' target='_blank'>" + text + "</a>";
+        console.log("target only");
+    } else {
+        htmlCode = "<a href='" + link + "'>" + text + "</a>";
+        console.log("R");
+    }
+
+    console.log(htmlCode);
+    document.execCommand('insertHTML', true, htmlCode);
+
 }
 
 const changeColor = (event, element) => {
@@ -125,6 +157,23 @@ const changeSelection = (element) => {
             h1.appendChild(selectionContents);
             range.insertNode(h1);
             break;
+        case 'h2':
+            var range = window.getSelection().getRangeAt(0);
+            var selectionContents = range.extractContents();
+            var h2 = document.createElement("h2");
+            h2.appendChild(selectionContents);
+            range.insertNode(h2);
+            break;
+        case 'h3':
+            console.log(h1);
+            console.log(h2);
+            var range = window.getSelection().getRangeAt(0);
+            var selectionContents = range.extractContents();
+            var h3 = document.createElement("h3");
+            h3.appendChild(selectionContents);
+            range.insertNode(h3);
+            break;
+        
     }
 
 

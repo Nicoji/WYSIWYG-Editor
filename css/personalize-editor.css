@@ -119,3 +119,12 @@ body {
     font-style: italic;
     margin-top: 15px;
 }
+
+a input {
+    border-radius: 5px;
+    /* width: 90%; */
+}
+
+.link-button {
+    border-radius: 5px;
+}
