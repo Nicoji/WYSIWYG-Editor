@@ -13,7 +13,14 @@ body {
     min-width: 630px;
     max-width: 900px;
     margin: auto;
+    overflow: hidden;
     /* margin: 0px 50px; */
+}
+
+#editor img {
+    max-width: 300px;
+    max-height: 300px;
+    float: right;
 }
 
 .icon-block {
@@ -73,6 +80,7 @@ body {
     cursor: pointer;
 }
 
+
 .editor-item:hover {
     text-decoration: none;
 }
@@ -124,6 +132,8 @@ a input {
     border-radius: 5px;
     /* width: 90%; */
 }
+
+
 
 .link-button {
     border-radius: 5px;

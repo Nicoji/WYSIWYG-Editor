@@ -9,7 +9,9 @@ const labels = document.querySelectorAll('label');
 const linkInput = document.querySelector('.link-input');
 const titleInput = document.querySelector('.title-input');
 const targetInput = document.querySelector('#target-input');
-
+const srcInput = document.querySelector('.src-input');
+const altInput = document.querySelector('.alt-input');
+const hilite = document.querySelector('.hilite');
 // ici je le déclare pour tester la modification des couleurs
 // des icons, mais normalement svg est créé par le script
 
@@ -97,6 +99,19 @@ const createLink = (link, title, target, text) => {
     }
 
     console.log(htmlCode);
+    document.execCommand('insertHTML', true, htmlCode);
+
+}
+
+const createImage = (source, alt) => {
+    let htmlCode = "";
+
+    if(alt == "") {
+        htmlCode = "<img src='" + source + "'>";
+    } else {
+        htmlCode = "<img src='" + source + "' alt='" + alt + "'>";
+    }
+
     document.execCommand('insertHTML', true, htmlCode);
 
 }

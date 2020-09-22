@@ -9,6 +9,8 @@ const dropToggleLink = document.querySelector('.drop-toggle-link');
 const dropMenuLink = document.querySelector('.drop-menu-link');
 const dropToggleCustom = document.querySelector('.drop-toggle-custom');
 const dropMenuCustom = document.querySelector('.drop-menu-custom');
+const dropToggleImage = document.querySelector('.drop-toggle-image');
+const dropMenuImage = document.querySelector('.drop-menu-image');
 const items = document.querySelectorAll('a');
 
 let lastOpenedMenu = "";
@@ -32,8 +34,14 @@ const dropdown = (menuToOpen, toggle, event) => {
     } else {
 
         if(lastToggle != toggle && lastToggle != "") {
-            lastToggle.children[1].textContent = '▼';
+            console.log(lastToggle);
+            console.log(toggle);
             lastOpenedMenu.classList.remove('open');
+            lastToggle.children[1].textContent = '▼';
+
+            // if(lastToggle != dropToggleLink || lastToggle != dropToggleImage) {
+            //     console.log("mhhhh");
+            // }
         }
 
         lastOpenedMenu = menuToOpen;
@@ -44,6 +52,8 @@ const dropdown = (menuToOpen, toggle, event) => {
         dropMenuJustify.style.display = "none";
         dropMenuCustom.style.display = "none";
         dropMenuLink.style.display = "none";
+        dropMenuImage.style.display = "none";
+
 
         if(menuToOpen.classList.contains('open')) {
             menuToOpen.style.display = "none";
@@ -113,6 +123,9 @@ dropToggleCustom.addEventListener('click', function(){
 dropToggleLink.addEventListener('click', function(){
     dropdown(dropMenuLink, dropToggleLink, event);
 });
+dropToggleImage.addEventListener('click', function(){
+    dropdown(dropMenuImage, dropToggleImage, event);
+});
 
 for (let item of items) {
     item.addEventListener('click', function(){
@@ -125,5 +138,6 @@ dropMenuText.style.display = "none";
 dropMenuJustify.style.display = "none";
 dropMenuCustom.style.display = "none";
 dropMenuLink.style.display = "none";
+dropMenuImage.style.display = "none";
 
 
