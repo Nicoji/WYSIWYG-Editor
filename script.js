@@ -102,7 +102,7 @@ const createLink = (link, title, target, text) => {
 
     console.log(htmlCode);
     document.execCommand('insertHTML', true, htmlCode);
-
+    console.log(textBlock);
 }
 
 const createImage = (source, alt, align) => {
@@ -213,20 +213,34 @@ const changeSelection = (element) => {
     }
 }
 
-const resize = () => {
-    console.log(editor.clientHeight);
-    console.log(Event.clientY);
-    console.log(window.event.clientY + "px");
-    console.log(event.offsetY);
+const resize = (e) => {
+    // console.log(editor.clientHeight);
+    // console.log(Event.clientY);
+    // console.log(window.event.clientY + "px");
+    // console.log(event.offsetY);
 
-    setInterval(() => {
-        editor.style.height = window.clientY + "px";
-        // console.log("l");
-    }, 100);
+    // setInterval(() => {
+    //     editor.style.height = window.clientY + "px";
+    //     // console.log("l");
+    // }, 100);
+
+    editor.style.height = e.pageY - editor.getBoundingClientRect().top + 'px';
+}
+
+const stopResize = () => {
+    window.removeEventListener('mousemove', resize);
 }
 
 
-sizeBar.addEventListener('mousedown', resize); 
+sizeBar.addEventListener('mousedown', function(e) {
+    window.addEventListener('mousemove', resize);
+    window.addEventListener('mouseup', stopResize);
+}); 
 
 iconBlock.style.borderBottom = "2px solid #c9c9c9";
 
+console.log(textBlock);
+
+const codeView = () => {
+    textBlock.textContent = textBlock.innerHTML;
+}
