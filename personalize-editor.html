@@ -180,11 +180,15 @@
               <a href="javascript:void(0)" style="text-decoration: none;" class="d-flex justify-content-around">
                 <input class="src-input" type="text" placeholder="src">
                 <input class="alt-input" type="text" placeholder="alt">
-                <!-- <div style="padding-top: 5px;">
-                  <input type="checkbox" id="target-input">
-                  <label for="target-input">target="_blank"</label>
-                </div> -->
-                <input class="link-button" type="submit" value="Link !" onclick="createImage(srcInput.value, altInput.value, window.getSelection().toString())">
+                <div>
+                  <label for="align-input">Align:</label>
+                  <select id="align-input">
+                    <option value="left" default>Left</option>
+                    <option value="center">Center</option>
+                    <option value="right">Right</option>
+                  </select>
+                </div>
+                <input class="link-button" type="submit" value="Load !" onclick="createImage(srcInput.value, altInput.value, alignInput.value)">
               </a>
             </div>
           <a href="javascript:void(0)" class="editor-item mr-2" onclick="changeText('insertUnorderedList')" title="Code view">
@@ -241,6 +245,13 @@
 
         <div class="text-block" contenteditable="true">
         </div>
+
+        <div class="size-bar">
+          <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="" fill="black" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 8a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm0-3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm3 3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm0-3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm3 3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm0-3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm3 3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm0-3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm3 3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm0-3a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+          </svg>
+        </div>
+
       
     </div>
 

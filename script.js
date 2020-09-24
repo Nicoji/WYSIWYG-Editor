@@ -11,7 +11,9 @@ const titleInput = document.querySelector('.title-input');
 const targetInput = document.querySelector('#target-input');
 const srcInput = document.querySelector('.src-input');
 const altInput = document.querySelector('.alt-input');
+const alignInput = document.querySelector('#align-input');
 const hilite = document.querySelector('.hilite');
+const sizeBar = document.querySelector('.size-bar');
 // ici je le déclare pour tester la modification des couleurs
 // des icons, mais normalement svg est créé par le script
 
@@ -103,17 +105,37 @@ const createLink = (link, title, target, text) => {
 
 }
 
-const createImage = (source, alt) => {
+const createImage = (source, alt, align) => {
     let htmlCode = "";
-
+    
     if(alt == "") {
-        htmlCode = "<img src='" + source + "'>";
+        switch(align) {
+            case "center":
+                htmlCode = "<img class='img align-center' src='" + source + "'>";
+                break;
+            case "left":
+                htmlCode = "<img class='img align-left' src='" + source + "'>";
+                break;
+            case "right": 
+                htmlCode = "<img class='img align-right' src='" + source + "'>";
+                break;
+        }
     } else {
-        htmlCode = "<img src='" + source + "' alt='" + alt + "'>";
+        switch(align) {
+            case "center":
+                htmlCode = "<img class='img align-center' src='" + source + "' alt='" + alt + "'>";
+                break;
+            case "left":
+                htmlCode = "<img class='img align-left' src='" + source + "' alt='" + alt + "'>";
+                break;
+            case "right": 
+                htmlCode = "<img class='img align-right' src='" + source + "' alt='" + alt + "'>";
+                break;
+        }
     }
-
     document.execCommand('insertHTML', true, htmlCode);
-
+    srcInput.value = ""; 
+    altInput.value = "";
 }
 
 const changeColor = (event, element) => {
@@ -188,11 +210,23 @@ const changeSelection = (element) => {
             h3.appendChild(selectionContents);
             range.insertNode(h3);
             break;
-        
     }
+}
 
+const resize = () => {
+    console.log(editor.clientHeight);
+    console.log(Event.clientY);
+    console.log(window.event.clientY + "px");
+    console.log(event.offsetY);
 
+    setInterval(() => {
+        editor.style.height = window.clientY + "px";
+        // console.log("l");
+    }, 100);
 }
 
 
+sizeBar.addEventListener('mousedown', resize); 
+
 iconBlock.style.borderBottom = "2px solid #c9c9c9";
+
