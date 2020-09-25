@@ -1,5 +1,6 @@
 :root {    
     --submenu-color: #e7e7e7; 
+    --height: 
 }
 
 body {
@@ -12,11 +13,12 @@ body {
     box-shadow: 3px 6px 31px 0px rgb(44, 44, 44);
     min-width: 630px;
     max-width: 900px;
+    min-height: 150px;
     /* padding-bottom: 15px; */
     margin: auto;
     margin-bottom: 15px;
-    overflow: hidden;
-    position: relative;
+    overflow-y: hidden;
+    /* position: relative; */
     /* margin: 0px 50px; */
 }
 
@@ -24,6 +26,8 @@ body {
     max-width: 300px;
     max-height: 300px;
     text-align: center;
+    position: relative;
+    z-index: 2;
     /* float: right; */
 }
 
@@ -44,7 +48,7 @@ body {
     background-color: #fff;
     width: 100%;
     min-height: 300px;
-    height: 100%;
+    height: 300px;
     border-radius: 0px 0px 10px 10px;
     padding: 10px;
     padding-bottom: 25px;
@@ -145,12 +149,13 @@ a input {
 .size-bar {
     width: 100%;
     height: 18px;
-    background-color: grey;
+    background-color: var(--submenu-color);
     padding-bottom: 5px;
     text-align: center;
     cursor: ns-resize;
-    position: absolute;
+    position: sticky;
     bottom: 0px;
+    z-index: 1;
 }
 
 .img:hover {
@@ -168,4 +173,14 @@ a input {
 
 .align-right {
     float: right;
+}
+
+*[contenteditable="true"]{display: inline-block;}
+
+.absolute {
+    position: absolute;
+}
+
+.relative {
+    position: relative;
 }

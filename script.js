@@ -166,14 +166,9 @@ const changeColor = (event, element) => {
                 sub.style.setProperty('--submenu-color', event.target.value);
             }
             iconBlock.style.borderBottom = "2px solid " + event.target.value;
+            sizeBar.style.setProperty('--submenu-color', event.target.value);
             break;
     }
-
-    // if(editor.style.background != textBlock.style.background) {
-    //     iconBlock.style.borderBottom = "0px";
-    // } else {
-    //     iconBlock.style.borderBottom = "2px solid #c9c9c9";
-    // }
 }
 
 const changeSelection = (element) => {
@@ -214,23 +209,14 @@ const changeSelection = (element) => {
 }
 
 const resize = (e) => {
-    // console.log(editor.clientHeight);
-    // console.log(Event.clientY);
-    // console.log(window.event.clientY + "px");
-    // console.log(event.offsetY);
-
-    // setInterval(() => {
-    //     editor.style.height = window.clientY + "px";
-    //     // console.log("l");
-    // }, 100);
-
-    editor.style.height = e.pageY - editor.getBoundingClientRect().top + 'px';
+    if(textBlock.clientHeight > 100) {
+        textBlock.style.height = e.pageY + 'px';
+    } 
 }
 
 const stopResize = () => {
     window.removeEventListener('mousemove', resize);
 }
-
 
 sizeBar.addEventListener('mousedown', function(e) {
     window.addEventListener('mousemove', resize);
@@ -239,8 +225,8 @@ sizeBar.addEventListener('mousedown', function(e) {
 
 iconBlock.style.borderBottom = "2px solid #c9c9c9";
 
-console.log(textBlock);
-
 const codeView = () => {
-    textBlock.textContent = textBlock.innerHTML;
+    // textBlock.textContent = textBlock.outerHTML;
+    console.log(textBlock.selectionStart);
+    textBlock.style.border = "4px solid red";
 }
