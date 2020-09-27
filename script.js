@@ -12,8 +12,10 @@ const targetInput = document.querySelector('#target-input');
 const srcInput = document.querySelector('.src-input');
 const altInput = document.querySelector('.alt-input');
 const alignInput = document.querySelector('#align-input');
+const fileInput = document.querySelector('#file');
 const hilite = document.querySelector('.hilite');
 const sizeBar = document.querySelector('.size-bar');
+const highlight = document.querySelector('.highlighter');
 // ici je le déclare pour tester la modification des couleurs
 // des icons, mais normalement svg est créé par le script
 
@@ -70,9 +72,6 @@ const sizeBar = document.querySelector('.size-bar');
 // svg[13].classList.add('');
 
 
-
-
-
 const changeText = (command, ShowDefaultUI, value) => {
     console.log(value);
     document.execCommand(command, ShowDefaultUI, value);
@@ -107,7 +106,21 @@ const createLink = (link, title, target, text) => {
 
 const createImage = (source, alt, align) => {
     let htmlCode = "";
-    
+    // let src = "";
+    // console.log(file);
+    // console.log(source);
+    // console.log(alt);
+    // console.log(align);
+    // console.log(file.src);
+
+    // if(file != "" && source != "") {
+    //     src = file;
+    // } else if(source == "" && file != "") {
+    //     src = file;
+    // } else {
+    //     src = source;
+    // }
+
     if(alt == "") {
         switch(align) {
             case "center":
@@ -181,6 +194,7 @@ const changeSelection = (element) => {
             quote.appendChild(selectionContents);
             quote.classList.add('quote');
             range.insertNode(quote);
+            console.log(range.contains(quote));
             break; 
         case 'h1':
             var range = window.getSelection().getRangeAt(0);
@@ -229,4 +243,12 @@ const codeView = () => {
     // textBlock.textContent = textBlock.outerHTML;
     console.log(textBlock.selectionStart);
     textBlock.style.border = "4px solid red";
+}
+
+const highlighter = () => {
+    if(highlight.style.display == "none") {
+        highlight.style.display = "initial";
+    } else {
+        highlight.style.display = "none";
+    }
 }

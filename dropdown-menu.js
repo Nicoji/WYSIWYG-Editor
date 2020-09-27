@@ -16,10 +16,12 @@ const items = document.querySelectorAll('a');
 let lastOpenedMenu = "";
 let lastToggle = "";
 
+
 const dropdown = (menuToOpen, toggle, event) => {
 
     event.defaultPrevented;
 
+    highlight.style.display = "none";
 
     if(menuToOpen == "a") {
         if(lastOpenedMenu != "") {
