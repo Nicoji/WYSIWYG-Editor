@@ -16,6 +16,8 @@ const fileInput = document.querySelector('#file');
 const hilite = document.querySelector('.hilite');
 const sizeBar = document.querySelector('.size-bar');
 const highlight = document.querySelector('.highlighter');
+const highlightInput = document.querySelector('#highlight');
+
 // ici je le déclare pour tester la modification des couleurs
 // des icons, mais normalement svg est créé par le script
 
@@ -184,17 +186,58 @@ const changeColor = (event, element) => {
     }
 }
 
+let quote = document.createElement("blockquote");
+
+
 const changeSelection = (element) => {
 
     switch(element) {
         case 'quote': 
+
             var range = window.getSelection().getRangeAt(0);
             var selectionContents = range.extractContents();
-            var quote = document.createElement("blockquote");
-            quote.appendChild(selectionContents);
-            quote.classList.add('quote');
-            range.insertNode(quote);
-            console.log(range.contains(quote));
+
+            if(quote.childNodes.length == 0) {
+                quote.appendChild(selectionContents);
+                quote.classList.add('quote');
+                range.insertNode(quote);
+
+                console.log(textBlock.childNodes[1]); 
+                // Si on change un text en quote, qu'on le remet, et qu'on veut le rechanger, il disaparait
+                // car en le remettant normal, c'est devenu un <span>, du coup sur le deuxième clique 
+                // (que l'on detecte avec textBlock.childNodes[1]), il faut faire différemment 
+                // (changer le span pour un quote)
+
+                if(quote.parentElement.classList.contains('text-block')) {
+                    window.getSelection().removeAllRanges();
+                } else {
+                    quote.parentNode.removeChild(quote);
+                }
+
+            } else {
+                newSpan = document.createElement("span");
+                // console.log(newSpan);
+                // newSpan.appendChild(quote.textContent);
+                quote.replaceWith(newSpan);
+                newSpan.appendChild(selectionContents);
+                // console.log(quote);
+                quote = document.createElement("blockquote");
+                // console.log(range);
+                // console.log(lastRange);
+            }
+            
+            
+
+            //  if(!quote.parentNode) {
+            //     console.log(quote.parentNode);
+
+            //     quote.appendChild(selectionContents);
+            //     quote.classList.add('quote');
+            //     range.insertNode(quote);
+            // } else {
+            //     // quote.parentNode.removeChild(quote);
+            //     console.log('mh');
+            // }
             break; 
         case 'h1':
             var range = window.getSelection().getRangeAt(0);
@@ -245,10 +288,3 @@ const codeView = () => {
     textBlock.style.border = "4px solid red";
 }
 
-const highlighter = () => {
-    if(highlight.style.display == "none") {
-        highlight.style.display = "initial";
-    } else {
-        highlight.style.display = "none";
-    }
-}

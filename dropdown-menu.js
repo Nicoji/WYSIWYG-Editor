@@ -20,20 +20,19 @@ let lastToggle = "";
 const dropdown = (menuToOpen, toggle, event) => {
 
     event.defaultPrevented;
+    // highlight.style.display = "none";
 
-    highlight.style.display = "none";
+    // if(menuToOpen == "a") {
+    //     if(lastOpenedMenu != "") {
+    //         lastOpenedMenu.style.display = "none";
+    //         lastOpenedMenu.classList.remove('open');
+    //         textBlock.style.paddingTop = "10px";
+    //         lastToggle.children[1].textContent = '▼';
+    //         lastOpenedMenu = "";
+    //         lastToggle = "";
+    //     }
 
-    if(menuToOpen == "a") {
-        if(lastOpenedMenu != "") {
-            lastOpenedMenu.style.display = "none";
-            lastOpenedMenu.classList.remove('open');
-            textBlock.style.paddingTop = "10px";
-            lastToggle.children[1].textContent = '▼';
-            lastOpenedMenu = "";
-            lastToggle = "";
-        }
-
-    } else {
+    // } else {
 
         if(lastToggle != toggle && lastToggle != "") {
             console.log(lastToggle);
@@ -73,7 +72,7 @@ const dropdown = (menuToOpen, toggle, event) => {
             }
         }
     }
-}
+// }
     
 setInterval(function() {
     if(dropMenuCustom.classList.contains('open') && window.innerWidth <= 863) {
@@ -83,6 +82,21 @@ setInterval(function() {
         textBlock.style.paddingTop = "50px";
     } 
 }, 10);
+
+
+
+const highlighter = (elt) => {
+
+    if(elt == 'a') {
+        highlight.style.display = "none";
+    } else {
+        if(highlight.style.display == "none") {
+            highlight.style.display = "initial";
+        } else {
+            highlight.style.display = "none";
+        }
+    }
+}
 
 // const closeMenu = () => {
 
@@ -130,9 +144,11 @@ dropToggleImage.addEventListener('click', function(){
 });
 
 for (let item of items) {
-    item.addEventListener('click', function(){
-        dropdown('a');
-    });
+    if(item.classList.contains('hilite') == false) {
+        item.addEventListener('click', function(){
+            highlighter('a');
+        });
+    } 
 }
 
 dropMenuHeading.style.display = "none";
@@ -141,5 +157,4 @@ dropMenuJustify.style.display = "none";
 dropMenuCustom.style.display = "none";
 dropMenuLink.style.display = "none";
 dropMenuImage.style.display = "none";
-
 

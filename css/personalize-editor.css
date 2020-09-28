@@ -115,6 +115,7 @@ body {
 .arrow-menu {
     font-size: 10px;
     margin-top: 10px;
+    color: #000;
     /* border: 1px solid red; */
 }
 
@@ -256,7 +257,7 @@ a input {
 }
 
 .palette {
-    margin-left: 3px;
+    margin-left: 6px;
     display: flex;
     flex-wrap: wrap;
 }
