@@ -193,40 +193,39 @@ const changeSelection = (element) => {
 
     switch(element) {
         case 'quote': 
-
+            // console.log(quote.childNodes);
             var range = window.getSelection().getRangeAt(0);
             var selectionContents = range.extractContents();
 
+            // Selection isn't a quote, so we make it
             if(quote.childNodes.length == 0) {
+                
                 quote.appendChild(selectionContents);
                 quote.classList.add('quote');
                 range.insertNode(quote);
 
-                console.log(textBlock.childNodes[1]); 
-                // Si on change un text en quote, qu'on le remet, et qu'on veut le rechanger, il disaparait
-                // car en le remettant normal, c'est devenu un <span>, du coup sur le deuxième clique 
-                // (que l'on detecte avec textBlock.childNodes[1]), il faut faire différemment 
-                // (changer le span pour un quote)
+                if(textBlock.childNodes[1].classList.contains('deleted-quote')) {
+                    newSpan.replaceWith(quote);
+                    window.getSelection().removeAllRanges();
+                } else {
+                    
+                }
 
+                // If the quote we made isn't in the textbox, we directly delete it, else we unselect the text (can create a bug)
                 if(quote.parentElement.classList.contains('text-block')) {
                     window.getSelection().removeAllRanges();
                 } else {
                     quote.parentNode.removeChild(quote);
                 }
-
+            
+            // Selection is already a quote, so we change the quote tag by a span 
             } else {
                 newSpan = document.createElement("span");
-                // console.log(newSpan);
-                // newSpan.appendChild(quote.textContent);
+                newSpan.classList.add('deleted-quote')
                 quote.replaceWith(newSpan);
                 newSpan.appendChild(selectionContents);
-                // console.log(quote);
                 quote = document.createElement("blockquote");
-                // console.log(range);
-                // console.log(lastRange);
             }
-            
-            
 
             //  if(!quote.parentNode) {
             //     console.log(quote.parentNode);

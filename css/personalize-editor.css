@@ -199,6 +199,10 @@ a input {
     z-index: 1;
 }
 
+.size-icon {
+    padding-bottom: 5px;
+}
+
 .img:hover {
     opacity: 50%;
 }
