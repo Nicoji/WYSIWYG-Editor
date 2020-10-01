@@ -75,8 +75,10 @@ const highlightInput = document.querySelector('#highlight');
 
 
 const changeText = (command, ShowDefaultUI, value) => {
-    console.log(value);
     document.execCommand(command, ShowDefaultUI, value);
+    if(command == 'hiliteColor') {
+        highlight.style.display = "none";
+    }
 }
 
 const createLink = (link, title, target, text) => {
@@ -188,81 +190,134 @@ const changeColor = (event, element) => {
 
 let quote = document.createElement("blockquote");
 
+// const removeFormat = (text, node) => {
+//     console.log(node);
+//     if('newSpan' in window) {
+//         if(node.parentNode.classList.contains('remove-format')) {
+//             node.parentNode.replaceWith(newSpan);
+//             newSpan.textContent = text;
+//             node.parentNode.removeChild(node);
 
-const changeSelection = (element) => {
+//             // node.replaceWith(newSpan);
 
-    switch(element) {
-        case 'quote': 
-            // console.log(quote.childNodes);
-            var range = window.getSelection().getRangeAt(0);
-            var selectionContents = range.extractContents();
+//             console.log(2);
+//         } else {
+//             console.log(3);
+//         }
+//     } else {
+//         newSpan = document.createElement("span");
+//             newSpan.classList.add('remove-format');
+//             newSpan.textContent = text;
+//             node.replaceWith(newSpan);
+//             console.log(1);
+//     }       
+// }
 
-            // Selection isn't a quote, so we make it
-            if(quote.childNodes.length == 0) {
-                
-                quote.appendChild(selectionContents);
-                quote.classList.add('quote');
-                range.insertNode(quote);
+const removeFormat = (text, node) => {
+   $(node).contents().unwrap();
+   console.log(textEditor.childNodes);
+//    $(node).parents().contents().unwrap();
+// for (let i = 0; i < $(node).parents().length; i++) {
+// //     // console.log($(node).parents()[2].classList.value);
+// //    console.log(i);
+//     if($(node).parents()[i].classList.value == 'text-block') {
+// //         // i = $(node).parents().length;
+//         console.log('ok');
 
-                if(textBlock.childNodes[1].classList.contains('deleted-quote')) {
-                    newSpan.replaceWith(quote);
-                    window.getSelection().removeAllRanges();
-                } else {
-                    
-                }
+// //         textEditor.textContent = text;
+//     } else {
+//         console.log($(node).parents());
+//         console.log($(node).parents().length);
+//         $(node).parents()[i].remove();
+//         textEditor.textContent = text;
 
-                // If the quote we made isn't in the textbox, we directly delete it, else we unselect the text (can create a bug)
-                if(quote.parentElement.classList.contains('text-block')) {
-                    window.getSelection().removeAllRanges();
-                } else {
-                    quote.parentNode.removeChild(quote);
-                }
-            
-            // Selection is already a quote, so we change the quote tag by a span 
-            } else {
-                newSpan = document.createElement("span");
-                newSpan.classList.add('deleted-quote')
-                quote.replaceWith(newSpan);
-                newSpan.appendChild(selectionContents);
-                quote = document.createElement("blockquote");
-            }
-
-            //  if(!quote.parentNode) {
-            //     console.log(quote.parentNode);
-
-            //     quote.appendChild(selectionContents);
-            //     quote.classList.add('quote');
-            //     range.insertNode(quote);
-            // } else {
-            //     // quote.parentNode.removeChild(quote);
-            //     console.log('mh');
-            // }
-            break; 
-        case 'h1':
-            var range = window.getSelection().getRangeAt(0);
-            var selectionContents = range.extractContents();
-            var h1 = document.createElement("h1");
-            h1.appendChild(selectionContents);
-            range.insertNode(h1);
-            break;
-        case 'h2':
-            var range = window.getSelection().getRangeAt(0);
-            var selectionContents = range.extractContents();
-            var h2 = document.createElement("h2");
-            h2.appendChild(selectionContents);
-            range.insertNode(h2);
-            break;
-        case 'h3':
-            console.log(h1);
-            console.log(h2);
-            var range = window.getSelection().getRangeAt(0);
-            var selectionContents = range.extractContents();
-            var h3 = document.createElement("h3");
-            h3.appendChild(selectionContents);
-            range.insertNode(h3);
-            break;
-    }
+//     }
+// }
+// // console.log($(node).parents());
 }
+
+// const changeSelection = (element) => {
+
+//     switch(element) {
+//         case 'quote': 
+//             // console.log(quote.childNodes);
+//             var range = window.getSelection().getRangeAt(0);
+//             var selectionContents = range.extractContents();
+
+//             // Selection isn't a quote, so we make it
+//             if(quote.childNodes.length == 0) {
+                
+//                 quote.appendChild(selectionContents);
+//                 quote.classList.add('quote');
+//                 range.insertNode(quote);
+
+//                 // if(range.endOffset > 1) {
+//                 //     range.insertNode(quote);
+//                 // }
+
+//                 // console.log(quote);
+//                 // console.log(range.endOffset);
+//                 // console.log(selectionContents);
+
+//                 if(textBlock.childNodes[1] && textBlock.childNodes[1].classList.contains('deleted-quote')) {
+//                     newSpan.replaceWith(quote);
+//                     window.getSelection().removeAllRanges();
+//                 } 
+
+//                 // If the quote we made isn't in the textbox, we directly delete it, else we unselect the text (can create a bug)
+//                 // if(quote.parentElement) {
+//                     if(quote.parentElement.classList.contains('text-block')) {
+//                         window.getSelection().removeAllRanges();
+//                         console.log('bien');
+//                     } else {
+//                         quote.parentNode.removeChild(quote);
+//                     }
+                    
+//             // Selection is already a quote, so we change the quote tag by a span 
+//             } else {
+//                 newSpan = document.createElement("span");
+//                 newSpan.classList.add('deleted-quote')
+//                 quote.replaceWith(newSpan);
+//                 newSpan.appendChild(selectionContents);
+//                 quote = document.createElement("blockquote");
+//             }
+
+//             //  if(!quote.parentNode) {
+//             //     console.log(quote.parentNode);
+
+//             //     quote.appendChild(selectionContents);
+//             //     quote.classList.add('quote');
+//             //     range.insertNode(quote);
+//             // } else {
+//             //     // quote.parentNode.removeChild(quote);
+//             //     console.log('mh');
+//             // }
+//             break; 
+//         case 'h1':
+//             var range = window.getSelection().getRangeAt(0);
+//             var selectionContents = range.extractContents();
+//             var h1 = document.createElement("h1");
+//             h1.appendChild(selectionContents);
+//             range.insertNode(h1);
+//             break;
+//         case 'h2':
+//             var range = window.getSelection().getRangeAt(0);
+//             var selectionContents = range.extractContents();
+//             var h2 = document.createElement("h2");
+//             h2.appendChild(selectionContents);
+//             range.insertNode(h2);
+//             break;
+//         case 'h3':
+//             console.log(h1);
+//             console.log(h2);
+//             var range = window.getSelection().getRangeAt(0);
+//             var selectionContents = range.extractContents();
+//             var h3 = document.createElement("h3");
+//             h3.appendChild(selectionContents);
+//             range.insertNode(h3);
+//             break;
+//     }
+// }
 
 const resize = (e) => {
     if(textBlock.clientHeight > 100) {
